@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>241228</title>
+    <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+    <style>
+        @font-face {
+            font-family: 'Wonderly';
+            src: url('Wonderly.otf') format('opentype');
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #111111;
+            color: white;
+            font-family: 'Wonderly', Arial, sans-serif;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            background-image: url('heart.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 600px; /* Adjust as needed */
+            height: 600px; /* Adjust as needed */
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 2px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInSlideUp 1s ease-in forwards;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #ff5c5c;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Wonderly', Arial, sans-serif;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInSlideUp 1s ease-in 0.5s forwards;
+        }
+        .button:hover {
+            background-color: #ffffff;
+            transform: scale(1.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button::after {
+            content: "i love u";
+            transition: content 1s;
+            opacity: 1;
+        }
+        .button:hover::after {
+            content: "click for a recap";
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+        }
+        .video-container {
+            position: relative;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Pink background */
+            padding: 10px;
+            border-radius: 0 0 15px 15px; /* Rounded corners at the bottom */
+        }
+        .control-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>it's been a year...</h1>
+        <button class="button" id="openModal"></button>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <iframe width="800" height="450" src="https://www.youtube.com/embed/VFcJdmiRvcA?si=Jj75c9hrIJbNJ2zN&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Get modal element
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("openModal");
+        const iframe = document.querySelector('iframe');
+        const initialSrc = iframe.src;
+
+        // Open the modal
+        btn.onclick = function() {
+            modal.style.display = "flex";
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none"; // Hide the modal
+                iframe.src = initialSrc;
+            }
+        }
+    </script>
+</body>
+</html>
